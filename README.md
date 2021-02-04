@@ -1,2 +1,0 @@
-# FsecureInternTask
-Software Engineer Task
