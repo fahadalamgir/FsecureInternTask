@@ -1,0 +1,56 @@
+﻿@* This is the Razor view for web page display to users *@
+
+@model List<HolidayModel>
+
+@{
+    ViewData["Title"] = "Public Holidays API";
+}
+
+<h1>Find Public Holidays</h1>
+<form asp-controller="Home" asp-action="Index">
+    <table>
+        <tr>
+            <td>Country Code (i.e PL for Poland)</td>
+            <td><input type="text" id="txtCountryCode" name="CountryCode"  required /></td>
+
+            <td>Year in (YYYY) format</td>
+            <td><input type="number" id="txtYear" name="Year"  required /> </td>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+<hr />
+
+@if (Model != null && Model.Count > 0)
+{
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Local Name</th>
+            <th>Name</th>
+            <th>Country Code</th>
+            <th>Global</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.Date.Value.ToShortDateString()</td> 
+                <td>@Html.DisplayFor(modelItem=>item.LocalName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.CountryCode)</td>
+                <td>@Html.DisplayFor(modelItem => item.Global)</td>
+                <td>@Html.DisplayFor(modelItem => item.Type)</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+}
